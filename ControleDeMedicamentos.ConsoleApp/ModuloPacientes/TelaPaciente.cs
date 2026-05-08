@@ -1,4 +1,4 @@
-using System;
+
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.Utilidades;
 namespace ControleDeMedicamentos.ConsoleApp.ModuloPacientes;
@@ -27,7 +27,7 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud, ITelaOpcoes
         foreach (Paciente p in registrosPaciente)
         {
             Console.WriteLine(
-                        "{0, -7} | {1, -20} | {2, -10} {3, -15} {4, -15}",
+                        "{0, -7} | {1, -20} | {2, -15} {3, -20} {4, -15}",
                         p.Id, p.Nome, p.Telefone, p.CartaoSus, p.Cpf
                     );
         }
