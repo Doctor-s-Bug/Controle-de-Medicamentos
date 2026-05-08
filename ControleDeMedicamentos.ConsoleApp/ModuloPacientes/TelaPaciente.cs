@@ -1,17 +1,40 @@
 using System;
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.Utilidades;
 namespace ControleDeMedicamentos.ConsoleApp.ModuloPacientes;
 
 public class TelaPaciente : TelaBase<Paciente>, ITelaCrud, ITelaOpcoes
 {
-    public TelaPaciente(string nomeEntidade, IRepositorio<Paciente> repositorio) : base("Paciente", repositorio)
+    public TelaPaciente(IRepositorio<Paciente> repositorio) : base("Paciente", repositorio)
     {
 
     }
 
     public override void VisualizarTodos(bool deveExibirCabecalho)
     {
-        throw new NotImplementedException();
+        if (deveExibirCabecalho)
+        {
+            ExibirCabecalho("Visualizando Pacientes...");
+        }
+
+        Console.WriteLine(
+            "{0, -7} | {1, -20} | {2, -15} {3, -20} {4, -15}",
+            "Id", "Nome", "Telefone", "Cartao SUS", "CPF"
+        );
+
+        List<Paciente> registrosPaciente = repositorio.SelecionarTodos();
+
+        foreach (Paciente p in registrosPaciente)
+        {
+            Console.WriteLine(
+                        "{0, -7} | {1, -20} | {2, -10} {3, -15} {4, -15}",
+                        p.Id, p.Nome, p.Telefone, p.CartaoSus, p.Cpf
+                    );
+        }
+        if (deveExibirCabecalho)
+        {
+            Notificador.ExibirMensagem("");
+        }
     }
 
     protected override Paciente ObterDadosCadastrais()

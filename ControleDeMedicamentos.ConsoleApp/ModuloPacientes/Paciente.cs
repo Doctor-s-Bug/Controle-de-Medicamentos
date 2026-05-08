@@ -37,14 +37,17 @@ public class Paciente : EntidadeBase
     List<string> erros = new List<string>();
 
     if (String.IsNullOrWhiteSpace(Nome))
-      erros.Add("Nome não pode ser Null!;");
+      erros.Add("O campo NOME não pode ser Null!");
 
     else if (Nome.Length < 3 || Nome.Length > 100)
-      erros.Add("Nome deve conter entre 3 a 100 caracteres!;");
+      erros.Add("Nome deve conter entre 3 a 100 caracteres!");
 
     string telefoneEncurtado = Telefone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "");
     bool contemLetraOuSimbolo = false;
     int contadorDigitos = 0;
+
+    if (CartaoSus.Length != 15)
+      erros.Add("O campo CARTAO SUS deve conter 15 caracteres");
 
     for (int i = 0; i < telefoneEncurtado.Length; i++)
     {
@@ -59,13 +62,13 @@ public class Paciente : EntidadeBase
     }
 
     if (contadorDigitos < 10 || contadorDigitos > 11)
-      erros.Add("O campo \"Telefone\" deve conter entre 10 e 11 dígitos;");
+      erros.Add("O campo \"Telefone\" deve conter entre 10 e 11 dígitos");
 
     if (contemLetraOuSimbolo)
-      erros.Add("O campo \"Telefone\" deve conter apenas dígitos;");
+      erros.Add("O campo \"Telefone\" deve conter apenas dígitos");
 
     if (Cpf.Length != 14)
-      erros.Add("O campo CPF deve conter 14 digitos!;");
+      erros.Add("O campo CPF deve conter 14 digitos!");
 
     return erros;
   }
