@@ -15,10 +15,10 @@ public class Paciente : EntidadeBase
     Cpf = cpf;
   }
 
-  public string Nome { get; set; }
-  public string Telefone { get; set; }
-  public string CartaoSus { get; set; }
-  public string Cpf { get; set; }
+  public string Nome { get; private set; }
+  public string Telefone { get; private set; }
+  public string CartaoSus { get; private set; }
+  public string Cpf { get; private set; }
 
 
   public override void AtualizarDados(EntidadeBase entidadeAtualizada)
