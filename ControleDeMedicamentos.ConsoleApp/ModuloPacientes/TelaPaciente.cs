@@ -33,7 +33,7 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud, ITelaOpcoes
         }
         if (deveExibirCabecalho)
         {
-            Notificador.ExibirMensagem("");
+            Notificador.ExibirMensagem();
         }
     }
 

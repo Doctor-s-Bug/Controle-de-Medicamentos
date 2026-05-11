@@ -19,21 +19,21 @@ public class TelaFornecedor : TelaBase<Fornecedor>, ITelaOpcoes, ITelaCrud
         }
 
         Console.WriteLine(
-            "{0, -7} | {1, -20} | {2, -25} {3, -20}",
+            "{0, -7} | {1, -20} | {2, -15} | {3, -25}",
             "Id", "Nome", "Telefone", "Cnpj"
         );
 
         foreach (Fornecedor fornecedor in listadefornecedor)
         {
             Console.WriteLine(
-                "{0, -7} | {1, -20} | {2, -25} {3, -20}",
+                "{0, -7} | {1, -20} | {2, -15} | {3, -25}",
                 fornecedor.Id, fornecedor.Nome, fornecedor.Telefone, fornecedor.Cnpj
             );
         }
 
         if (deveExibirCabecalho)
         {
-            Notificador.ExibirMensagem("");
+            Notificador.ExibirMensagem();
         }
     }
 

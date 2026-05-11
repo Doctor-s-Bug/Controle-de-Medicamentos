@@ -2,6 +2,12 @@ namespace ControleDeMedicamentos.ConsoleApp.Utilidades;
 
 public static class Notificador
 {
+    public static void ExibirMensagem()
+    {
+        Console.WriteLine("---------------------------------");
+        Console.Write("Digite ENTER para continuar...");
+        Console.ReadLine();
+    }
     public static void ExibirMensagem(string mensagem)
     {
         Console.WriteLine("---------------------------------");

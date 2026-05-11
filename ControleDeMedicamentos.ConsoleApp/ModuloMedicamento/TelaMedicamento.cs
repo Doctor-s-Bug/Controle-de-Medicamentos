@@ -21,7 +21,7 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud, ITelaOpcoes
         }
 
         Console.WriteLine(
-            "{0, -7} | {1, -20} | {2, -25} {3, -20} {4, -15}",
+            "{0, -7} | {1, -20} | {2, -25} | {3, -20} | {4, -15}",
             "Id", "Nome", "Descrição", "Quantidade Estoque", "Fornecedor"
         );
 
@@ -30,13 +30,13 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud, ITelaOpcoes
         foreach (Medicamento m in registrosMedicamentos)
         {
             Console.WriteLine(
-                        "{0, -7} | {1, -20} | {2, -25} {3, -20} {4, -15}",
+                        "{0, -7} | {1, -20} | {2, -25} {3, -20} | {4, -15}",
                         m.Id, m.Nome, m.Descricao, m.QuantidadeEstoque, m.Fornecedor.Nome
                     );
         }
         if (deveExibirCabecalho)
         {
-            Notificador.ExibirMensagem("");
+            Notificador.ExibirMensagem();
         }
     }
 
