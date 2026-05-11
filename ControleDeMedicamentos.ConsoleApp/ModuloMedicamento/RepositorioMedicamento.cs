@@ -5,9 +5,9 @@ using ControleDeMedicamentos.ConsoleApp.ModuloPacientes;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 
-public class RepositorioMeciamento : RepositorioBaseEmArquivo<Medicamento>, IRepositorio<Medicamento>
+public class RepositorioMedicamento : RepositorioBaseEmArquivo<Medicamento>, IRepositorio<Medicamento>
 {
-    public RepositorioMeciamento(ContextoJson contexto) : base(contexto)
+    public RepositorioMedicamento(ContextoJson contexto) : base(contexto)
     {
     }
 
