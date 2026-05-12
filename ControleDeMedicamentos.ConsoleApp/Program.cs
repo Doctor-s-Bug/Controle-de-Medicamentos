@@ -5,6 +5,7 @@ using ControleDeMedicamentos.ConsoleApp.ModuloPacientes;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedores;
 using ControleDeMedicamentos.ConsoleApp.Utilidades;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+using ControleDeMedicamentos.ConsoleApp.ModuloFuncionarios;
 
 ContextoJson contexto = new ContextoJson();
 
@@ -21,10 +22,14 @@ catch (JsonException)
 IRepositorio<Paciente> repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
 IRepositorio<Fornecedor> repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
 IRepositorio<Medicamento> repositorioMedicamento = new RepositorioMedicamento(contexto);
+
+IRepositorio<Funcionario> repositorioFuncionarios = new RepositorioFuncionario(contexto);
+
 TelaPrincipal telaPrincipal = new TelaPrincipal(
     repositorioPaciente,
     repositorioFornecedor,
-    repositorioMedicamento
+    repositorioMedicamento,
+    repositorioFuncionarios
 );
 
 while (true)
