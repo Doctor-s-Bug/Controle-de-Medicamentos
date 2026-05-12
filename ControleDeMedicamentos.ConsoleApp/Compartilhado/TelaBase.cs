@@ -6,7 +6,7 @@ public abstract class TelaBase<T> where T : EntidadeBase
 {
     protected string nomeEntidade;
     protected IRepositorio<T> repositorio;
-
+    
     protected TelaBase(string nomeEntidade, IRepositorio<T> repositorio)
     {
         this.nomeEntidade = nomeEntidade;

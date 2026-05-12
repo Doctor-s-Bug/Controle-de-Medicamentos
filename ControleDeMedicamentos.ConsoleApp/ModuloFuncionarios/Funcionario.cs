@@ -6,6 +6,13 @@ public class Funcionario : EntidadeBase
     public string Telefone;
     public string Cpf;
 
+    public Funcionario(string nome, string telefone, string cpf)
+    {
+        Nome = nome;
+        Telefone = telefone;
+        Cpf = cpf;
+    }
+
     public override void AtualizarDados(EntidadeBase entidadeAtualizada)
     {
         Funcionario funcionarioAtualizado = (Funcionario)entidadeAtualizada;
