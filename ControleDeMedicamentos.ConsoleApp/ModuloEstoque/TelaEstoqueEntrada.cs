@@ -12,15 +12,15 @@ public class TelaEstoque : ITelaOpcoes
 {
     private readonly IRepositorio<Fornecedor> repositorioFornecedor;
     private readonly IRepositorio<Funcionario> repositorioFuncionario;
-    private readonly IRepositorio<Paciente> repositorioPaciente;
     private readonly IRepositorio<Medicamento> repositorioMedicamento;
+    private readonly IRepositorio<Paciente> repositorioPaciente;
 
     public TelaEstoque(IRepositorio<Paciente> repositorioPaciente, IRepositorio<Fornecedor> repositorioFornecedor, IRepositorio<Medicamento> repositorioMedicamento, IRepositorio<Funcionario> repositorioFuncionario)
     {
-        this.repositorioPaciente = repositorioPaciente;
         this.repositorioFornecedor = repositorioFornecedor;
         this.repositorioMedicamento = repositorioMedicamento;
         this.repositorioFuncionario = repositorioFuncionario;
+        this.repositorioPaciente = repositorioPaciente;
     }
     public string? ObterOpcaoMenu()
     {
@@ -38,7 +38,7 @@ public class TelaEstoque : ITelaOpcoes
         return opcaoMenu;
     }
 
-    private EntradaEstoque? ObterDadosCadastrais()
+    private EntradaEstoque? ObterDadosEntrada()
     {
         Console.Clear();
 
@@ -54,7 +54,7 @@ public class TelaEstoque : ITelaOpcoes
 
     public void EntradaEstoque()
     {
-        EntradaEstoque? entrada = ObterDadosCadastrais();
+        EntradaEstoque? entrada = ObterDadosEntrada();
 
         if (entrada == null)
         {
@@ -74,13 +74,55 @@ public class TelaEstoque : ITelaOpcoes
         }
 
         entrada.Medicamento.AdiconarQuantidadeAoMedicamento(entrada.QuantidadeEntrada);
+    }
+    public void RetirarEstoque()
+    {
+        SaidaEstoque? saidaEstoque = ObterDadosSaida();
 
+        if (saidaEstoque == null)
+        {
+            Notificador.ExibirMensagem("Preencha todos os campos para dar saida no estoque!");
+            RetirarEstoque();
+            return;
+        }
 
+        List<string> erros = saidaEstoque.Validar();
+
+        if (erros.Count > 0)
+        {
+            Notificador.ExibirMensagensErro(erros);
+            EntradaEstoque();
+            return;
+        }
+
+        bool conseguiuRetirar = saidaEstoque.Medicamento.RetirarQuantidadeAoMedicamento(saidaEstoque.QuantidadeSaida);
+
+        if (!conseguiuRetirar)
+        {
+            Notificador.ExibirMensagem("Valor digitado Invalido! Digite um valor Valido!");
+            RetirarEstoque();
+            return;
+        }
+
+        Notificador.ExibirMensagem($"Retirado a quantidade {saidaEstoque.QuantidadeSaida} de {saidaEstoque.Medicamento.Nome}");
+        System.Console.WriteLine();
+    }
+    private SaidaEstoque ObterDadosSaida()
+    {
+        Paciente? pacienteSelecionado = ObterPaciente();
+        Medicamento? medicamentoSelecionado = ObterMedicamento();
+
+        DateTime data = ObterData();
+        System.Console.Write("Digite a Quantidade a ser Retirada do estoque: ");
+        int quantidadeSaida = Convert.ToInt32(Console.ReadLine());
+
+        return new SaidaEstoque(data, pacienteSelecionado, medicamentoSelecionado, quantidadeSaida);
     }
     private Medicamento? ObterMedicamento()
     {
         Console.Clear();
-        List<Medicamento> medicamentos = repositorioMedicamento.SelecionarTodos();
+        System.Console.WriteLine("Selecione o Medicamento: \n");
+
         Console.WriteLine(
             "{0, -7} | {1, -20} | {2, -25} | {3, -20} | {4, -15}",
             "Id", "Nome", "Descrição", "Quantidade Estoque", "Fornecedor"
@@ -114,6 +156,9 @@ public class TelaEstoque : ITelaOpcoes
     public Funcionario? ObterFuncionario()
     {
         Console.Clear();
+
+        System.Console.WriteLine("Selecione o Funcionario para Iniciar a : \n");
+
         List<Funcionario> funcionarios = repositorioFuncionario.SelecionarTodos();
 
         Console.WriteLine(
@@ -166,8 +211,41 @@ public class TelaEstoque : ITelaOpcoes
         }
     }
 
-    internal void RetirarEstoque()
+    private Paciente? ObterPaciente()
     {
-        throw new NotImplementedException();
+        Console.Clear();
+
+        System.Console.WriteLine("Selecione o Paciente para o Medicamento: \n");
+
+        Console.WriteLine(
+            "{0, -7} | {1, -20} | {2, -15} {3, -20} {4, -15}",
+            "Id", "Nome", "Telefone", "Cartao SUS", "CPF"
+        );
+
+        List<Paciente> registrosPaciente = repositorioPaciente.SelecionarTodos();
+
+        foreach (Paciente p in registrosPaciente)
+        {
+            Console.WriteLine(
+                        "{0, -7} | {1, -20} | {2, -15} {3, -20} {4, -15}",
+                        p.Id, p.Nome, p.Telefone, p.CartaoSus, p.Cpf
+                    );
+        }
+
+        string idSelecionado;
+        do
+        {
+            Console.Write("Digite o ID do MEDICAMENTO que deseja Selecionar: ");
+            idSelecionado = Console.ReadLine() ?? string.Empty;
+
+            if (idSelecionado.Length == 7)
+                break;
+        } while (true);
+        Paciente? medicamentoSelecionado = repositorioPaciente.SelecionarPorId(idSelecionado);
+
+        if (medicamentoSelecionado == null)
+            return null;
+
+        return medicamentoSelecionado;
     }
 }

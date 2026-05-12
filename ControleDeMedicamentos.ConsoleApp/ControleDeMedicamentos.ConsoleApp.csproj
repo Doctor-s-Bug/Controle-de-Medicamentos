@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ModuloEstoque\" />
     <Folder Include="ModuloFornecedores\" />
   </ItemGroup>
 

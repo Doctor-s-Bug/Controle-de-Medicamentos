@@ -1,18 +1,25 @@
 using System;
+using System.Security.Cryptography;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloEstoque;
 
 public class EntradaEstoque
 {
-    public DateTime dataEntrada { get; set; }
+    public string Id;
+    public DateTime DataEntrada { get; set; }
     public Medicamento Medicamento { get; set; }
     public Funcionario Funcionario { get; set; }
     public int QuantidadeEntrada { get; set; }
 
     public EntradaEstoque(DateTime dataEntrada, Medicamento medicamento, Funcionario funcionario, int quantidadeEntrada)
     {
-        this.dataEntrada = dataEntrada;
+        Id = Convert
+                .ToHexString(RandomNumberGenerator.GetBytes(4))
+                .ToLower()
+                .Substring(0, 7);
+
+        this.DataEntrada = dataEntrada;
         Medicamento = medicamento;
         Funcionario = funcionario;
         QuantidadeEntrada = quantidadeEntrada;

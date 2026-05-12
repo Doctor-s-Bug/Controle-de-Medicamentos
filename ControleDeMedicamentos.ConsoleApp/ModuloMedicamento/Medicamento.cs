@@ -62,4 +62,14 @@ public class Medicamento : EntidadeBase
     {
         QuantidadeEstoque += quantidade;
     }
+    public bool RetirarQuantidadeAoMedicamento(int quantidade)
+    {
+        if (quantidade > QuantidadeEstoque)
+            return false;
+        if (quantidade <= 0)
+            return false;
+
+        QuantidadeEstoque -= quantidade;
+        return true;
+    }
 }
