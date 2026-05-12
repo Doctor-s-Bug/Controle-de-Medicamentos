@@ -6,6 +6,7 @@ using ControleDeMedicamentos.ConsoleApp.ModuloFornecedores;
 using ControleDeMedicamentos.ConsoleApp.Utilidades;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleDeMedicamentos.ConsoleApp.ModuloFuncionarios;
+using ControleDeMedicamentos.ConsoleApp.ModuloEstoque;
 
 ContextoJson contexto = new ContextoJson();
 
@@ -65,6 +66,13 @@ while (true)
 
             else if (opcaoSubMenu == "4")
                 telaCrud.VisualizarTodos(deveExibirCabecalho: true);
+        }
+        if (telaSelecionada is TelaEstoque telaEstoque)
+        {
+            if (opcaoSubMenu == "1")
+                telaEstoque.EntradaEstoque();
+            if (opcaoSubMenu == "2")
+                telaEstoque.RetirarEstoque();
         }
     }
 }

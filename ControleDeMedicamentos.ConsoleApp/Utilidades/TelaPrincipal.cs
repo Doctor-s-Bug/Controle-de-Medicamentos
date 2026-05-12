@@ -3,6 +3,7 @@ using ControleDeMedicamentos.ConsoleApp.ModuloPacientes;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedores;
 using ControleDeMedicamentos.ConsoleApp.ModuloFuncionarios;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+using ControleDeMedicamentos.ConsoleApp.ModuloEstoque;
 
 namespace ControleDeMedicamentos.ConsoleApp.Utilidades;
 
@@ -31,6 +32,7 @@ public class TelaPrincipal
         Console.WriteLine("2 - Gestão de Fornecedores");
         Console.WriteLine("3 - Gestão de Medicamentos");
         Console.WriteLine("4 - Gestão de Funcionarios");
+        Console.WriteLine("5 - Gestão de Estoque");
         Console.WriteLine("S - Sair");
         Console.WriteLine("---------------------------------");
         Console.Write("> ");
@@ -44,6 +46,8 @@ public class TelaPrincipal
             return new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
         if (opcaoMenuPrincipal == "4")
             return new TelaFuncionario(repositorioFuncionario);
+        if (opcaoMenuPrincipal == "5")
+            return new TelaEstoque(repositorioPaciente, repositorioFornecedor, repositorioMedicamento, repositorioFuncionario);
         return null;
     }
 }

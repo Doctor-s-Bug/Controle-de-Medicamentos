@@ -13,6 +13,10 @@ public class Medicamento : EntidadeBase
     public int QuantidadeEstoque { get; set; }
     public Fornecedor Fornecedor { get; set; }
 
+    public Medicamento()
+    {
+
+    }
     public Medicamento(string nome, string descricao, int quantidadeEstoque, Fornecedor fornecedor)
     {
         Nome = nome;
@@ -53,5 +57,9 @@ public class Medicamento : EntidadeBase
             erros.Add("O campo FORNECEDOR não pode ser NULO");
 
         return erros;
+    }
+    public void AdiconarQuantidadeAoMedicamento(int quantidade)
+    {
+        QuantidadeEstoque += quantidade;
     }
 }

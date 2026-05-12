@@ -18,5 +18,21 @@ public class EntradaEstoque
         QuantidadeEntrada = quantidadeEntrada;
     }
 
+    public List<String> Validar()
+    {
+        List<string> erros = new();
+
+        if (Medicamento == null)
+            erros.Add("O campo \"Medicamento\" não pode ser vazio!");
+
+        if (Funcionario == null)
+            erros.Add("O campo \"Funcionario\" não pode ser vazio!");
+
+        if (QuantidadeEntrada <= 0)
+            erros.Add("O campo \"Quantidade\" deve ser maior que zero!");
+
+
+        return erros;
+    }
 
 }

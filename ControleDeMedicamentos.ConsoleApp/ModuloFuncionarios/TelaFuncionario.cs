@@ -16,12 +16,12 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud, ITelaOpcoes
 
         if (deveExibirCabecalho)
         {
-            ExibirCabecalho("Visualizando Fornecedores...");
+            ExibirCabecalho("Visualizando Funcionarios...");
         }
 
         Console.WriteLine(
             "{0, -7} | {1, -20} | {2, -25} {3, -20}",
-            "Id", "Nome", "Telefone", "Cnpj"
+            "Id", "Nome", "Telefone", "CPF"
         );
 
         foreach (Funcionario funcionario in listadefornecedor)
