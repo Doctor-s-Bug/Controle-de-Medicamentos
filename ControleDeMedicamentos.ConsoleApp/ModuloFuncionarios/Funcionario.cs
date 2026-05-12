@@ -2,9 +2,9 @@ using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
 public class Funcionario : EntidadeBase
 {
-    public string Nome;
-    public string Telefone;
-    public string Cpf;
+    public string Nome { get; set; }
+    public string Telefone { get; set; }
+    public string Cpf { get; set; }
 
     public Funcionario(string nome, string telefone, string cpf)
     {
@@ -55,8 +55,8 @@ public class Funcionario : EntidadeBase
         if (contemLetraOuSimbolo)
             erros.Add("O campo \"Telefone\" deve conter apenas dígitos;");
 
-        if (Cpf.Length != 11)
-            erros.Add("O campo Cpf deve conter 11 digitos!;");
+        if (Cpf.Length != 14)
+            erros.Add("O campo Cpf deve conter 14 digitos!;");
 
         return erros;
     }
